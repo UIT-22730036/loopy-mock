@@ -1,23 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.scss";
 
 function App() {
+  const [content, setContent] = useState("");
+  const handleChange = (e) => {
+    setContent(handleConvert(e.target.value));
+  };
+
+  const handleConvert = (text) => {
+    const chars = text.split(" ");
+
+    return chars
+      .map((c) => {
+        return "nh" + c.slice(1);
+      })
+      .join(" ");
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="content">
+        <div
+          className="text"
+          style={{
+            border: "1px solid #000",
+            width: "100%",
+            padding: "1rem",
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          {content}
+        </div>
+        <textarea
+          placeholder="input here"
+          style={{
+            width: "100%",
+          }}
+          onChange={handleChange}
+        />
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzvR70xsTJDyvWBDikDIvasJT-qN7I23KI9Q&s"
+          alt=""
+        />
+      </div>
     </div>
   );
 }
